@@ -1,2 +1,21 @@
 ---
-# tasks file for repo-codeit
+- name: Check if EPEL repo is already configured.
+  ansible.builtin.stat:
+    path: "{{ codeit_repofile_path }}"
+  register: codeit_repofile_result
+
+- name: Import CodeIT GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ codeit_repo_gpg_key_url }}"
+  when: not codeit_repofile_result.stat.exists
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Add CodeIT repository
+  ansible.builtin.package:
+    name: "{{ codeit_repo_url }}"
+  register: result
+  until: result is succeeded
+  retries: 5
+  delay: 10
+  when: not codeit_repofile_result.stat.exists
