@@ -1,4 +1,4 @@
 ---
-codeit_repo_url: "https://repo.codeit.guru/codeit-repo-release.el{{ ansible_distribution_major_version }}.rpm"
-codeit_repo_gpg_key_url: "https://repo.codeit.guru/RPM-GPG-KEY-el{{ ansible_distribution_major_version }}"
 codeit_repofile_path: "/etc/yum.repos.d/codeit.repo"
+codeit_repo_gpg_key_url: "https://repo.codeit.guru/RPM-GPG-KEY-el{{ ansible_distribution_major_version }}"
+codeit_repofile_base_url: "https://repo.codeit.guru/packages/centos/{{ ansible_distribution_major_version }}/$basearch"

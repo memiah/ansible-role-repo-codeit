@@ -13,8 +13,8 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    codeit_repo_url: "https://repo.codeit.guru/codeit-repo-release.el{{ ansible_distribution_major_version }}.rpm"
     codeit_repo_gpg_key_url: "https://repo.codeit.guru/RPM-GPG-KEY-el{{ ansible_distribution_major_version }}"
+    codeit_repofile_base_url: "https://repo.codeit.guru/packages/centos/{{ ansible_distribution_major_version }}/$basearch"
 
 The CodeIT repo URL and GPG key URL. Generally, these should not be changed, but if this role is out of date, or if you need a very specific version, these can both be overridden.
 

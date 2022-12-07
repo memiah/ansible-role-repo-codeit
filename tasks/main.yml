@@ -1,5 +1,5 @@
 ---
-- name: Check if EPEL repo is already configured.
+- name: Check if CodeIt repo is already configured.
   ansible.builtin.stat:
     path: "{{ codeit_repofile_path }}"
   register: codeit_repofile_result
@@ -11,11 +11,12 @@
   when: not codeit_repofile_result.stat.exists
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: Add CodeIT repository
-  ansible.builtin.package:
-    name: "{{ codeit_repo_url }}"
-  register: result
-  until: result is succeeded
-  retries: 5
-  delay: 10
-  when: not codeit_repofile_result.stat.exists
+- name: Add CodeIT yum repository.
+  yum_repository:
+    name: CodeIT
+    description: CodeIT repo
+    file: 'codeit-el{{ ansible_distribution_major_version }}'
+    baseurl: '{{ codeit_repofile_base_url }} '
+    gpgcheck: yes
+    gpgkey: "{{ codeit_repo_gpg_key_url }}"
+    enabled: yes
