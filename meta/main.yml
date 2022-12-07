@@ -1,5 +1,6 @@
 galaxy_info:
   author: memiah
+  role_name: repo_codeit
   description: CodeIT repository for RHEL/CentOS.
   company: Memiah Limited
   license: MIT

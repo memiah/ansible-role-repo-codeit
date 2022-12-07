@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-        - memiah.repo-codeit
+        - memiah.repo_codeit
 
 License
 -------
