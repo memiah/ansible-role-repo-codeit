@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installs the [CodeIt repository](https://codeit.guru/en_US/) for RHEL/CentOS.
+Installs the [CodeIT repository](https://codeit.guru/en_US/) for RHEL/CentOS.
 
 Requirements
 ------------
@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-        - memiah.repo-epel
+        - memiah.repo-codeit
 
 License
 -------
