@@ -1,22 +1,23 @@
 ---
 - name: Check if CodeIt repo is already configured.
   ansible.builtin.stat:
-    path: "{{ codeit_repofile_path }}"
-  register: codeit_repofile_result
+    path: "{{ codeit_repo_file_path }}"
+  register: codeit_repo_file_result
 
 - name: Import CodeIT GPG key
   ansible.builtin.rpm_key:
     state: present
     key: "{{ codeit_repo_gpg_key_url }}"
-  when: not codeit_repofile_result.stat.exists
+  when: not codeit_repo_file_result.stat.exists
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Add CodeIT yum repository.
   yum_repository:
     name: CodeIT
     description: CodeIT repo
-    file: 'codeit-el{{ ansible_distribution_major_version }}'
-    baseurl: '{{ codeit_repofile_base_url }} '
+    file: '{{ codeit_repo_file_name }}'
+    baseurl: '{{ codeit_repo_file_base_url }} '
     gpgcheck: yes
     gpgkey: "{{ codeit_repo_gpg_key_url }}"
     enabled: yes
+  when: not codeit_repo_file_result.stat.exists
